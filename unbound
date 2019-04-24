@@ -10,6 +10,7 @@ echo "Iuniti services, script de instalação para o Unbound. By Marco totalment
 sleep 7
 
 apt-get install unbound nano wget dnsutils dnstop zabbix-agent htop -y
+chown unbound.unbound /etc/unbound/ -R
 rm /etc/unbound/unbound.conf.d/root-auto-trust-anchor-file.conf
 wget https://raw.githubusercontent.com/iuniti/unbound/master/iuniti.conf
 mv iuniti.conf /etc/unbound/unbound.conf.d/
@@ -17,7 +18,6 @@ wget http://www.internic.net/domain/named.root
 mv named.root /etc/unbound/root.hints
 unbound-anchor -v
 echo 127.0.0.1 > /etc/resolv.conf
-chown unbound.unbound /etc/unbound/ -R
 /etc/init.d/unbound stop
 /etc/init.d/unbound start
 ps ax | grep unbound
@@ -27,6 +27,7 @@ sleep 7
 
 sed -i 's/^# Server=.*/Server=138.0.115.13,2804:213c:1::13,iuniti..com.br/' /etc/zabbix/zabbix_agentd.conf
 sed -i 's/^# Hostname=.*/Hostname=ns1.recursivo/' /etc/zabbix/zabbix_agentd.conf
+/etc/init.d/zabbix-agent restart
 
 cowsay -f tux Instalacao Finalizada
 figlet -c By Iuniti Services
