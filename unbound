@@ -7,6 +7,7 @@ figlet -c "Instalacao"
 figlet -c "Unbound"
 figlet -c "Iuniti Services"
 echo "Iuniti services, script de instalação para o Unbound. By Marco totalmente automatizado."
+sleep 7
 
 apt-get install unbound nano wget dnsutils dnstop zabbix-agent htop -y
 rm /etc/unbound/unbound.conf.d/root-auto-trust-anchor-file.conf
@@ -24,8 +25,8 @@ echo "confira se o Unbound esta rodando"
 sleep 7
 
 
-sed -i 's/^# Server=.*/Server=138.0.115.13,2804:213c:1::13,iuniti..com.br/' /etc/zabbix/zabbix_server.conf
-sed -i 's/^# Hostname=.*/Hostname=ns1.recursivo/' /etc/zabbix/zabbix_server.conf
+sed -i 's/^# Server=.*/Server=138.0.115.13,2804:213c:1::13,iuniti..com.br/' /etc/zabbix/zabbix_agentd.conf
+sed -i 's/^# Hostname=.*/Hostname=ns1.recursivo/' /etc/zabbix/zabbix_agentd.conf
 
 cowsay -f tux Instalacao Finalizada
 figlet -c By Iuniti Services
